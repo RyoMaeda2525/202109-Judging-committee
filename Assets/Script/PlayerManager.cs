@@ -79,7 +79,8 @@ public class PlayerManager : MonoBehaviour
         }
     }
     public bool Floor()
-    {   if (isGroundCheck) 
+    {
+        if (isGroundCheck)
         {
             GroundCheck = true;
         }
@@ -87,13 +88,18 @@ public class PlayerManager : MonoBehaviour
         return GroundCheck;
     }
 
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "GroundCheck")
         {
             isGroundCheck = true;
-           
+
         }
+    }
+
+    public void AddSpead(float spead)
+    {
+        walkForce += spead;
     }
 }

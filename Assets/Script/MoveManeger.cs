@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveManeger : MonoBehaviour
 {
     /// <summary>移動速度</summary>
-    [SerializeField] float m_moveSpeed = 1f;
+    public float m_moveSpeed = 1f;
     /// <summary>壁を検出するための ray のベクトル</summary>
     [SerializeField] Vector2 m_rayForWall = Vector2.zero;
     [SerializeField] Vector2 m_rayForWall2 = Vector2.zero;

@@ -43,4 +43,10 @@ public class DaggerManager : MonoBehaviour
     {
         GameObject.Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Ground" || collider.gameObject.tag == "Enemy")
+        GameObject.Destroy(gameObject);
+    }
 }
