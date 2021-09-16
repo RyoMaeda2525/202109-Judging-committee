@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHP : MonoBehaviour
+public class Zonbie : MonoBehaviour
 {
     Rigidbody2D m_rb = default;
     private MoveManeger move;
