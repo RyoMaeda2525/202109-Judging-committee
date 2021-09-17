@@ -7,37 +7,47 @@ public class Rat : MonoBehaviour
     /// <summary>移動速度</summary>
     public float m_moveSpeed = 1f;
     /// <summary>壁を検出するための ray のベクトル</summary>
-    [SerializeField] Vector2 m_rayForWall = Vector2.zero;
-    [SerializeField] Vector2 m_rayForWall2 = Vector2.zero;
     /// <summary>壁のレイヤー（レイヤーはオブジェクトに設定されている）</summary>
-    [SerializeField] LayerMask m_wallLayer = 0;
     public float Jumppower = 1;
     private Rigidbody2D m_rb = default;
     public ratPlayerCheck m_PlayerCheck;
     bool inPlaer = false;
-    // public GameObject m_Player = default;
-    //public Vector3 scale;
-    //public Vector3 playerScale;
     public Vector3 playerPosition;
     private Vector3 Scale = default;
     private Vector2 velocity = default;
+    [SerializeField] float m_detectDelaySeconds = 1f;
+    float m_timer = 0f;
+    bool m_isGround = false;
+    Animator m_ani = default;
 
         void Start()
     {
         m_rb = GetComponent<Rigidbody2D>();
+        m_ani = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         velocity = m_rb.velocity;
-        inPlaer = m_PlayerCheck.PlayerInOut();
-        //MoveOnFloor();
+        //inPlaer = m_PlayerCheck.PlayerInOut();
         PlayerFind();
-        if (inPlaer)
+        if (m_PlayerCheck.IsPlayerFound)
         {
-            StartCoroutine(JumpStop());
+            m_timer += Time.deltaTime;
+
+            if(m_timer > m_detectDelaySeconds && m_isGround)
+            {
+                m_timer = 0;
+                Jump();
+            }
         }
+        else if(m_timer > 0)
+        {
+            m_timer = 0;
+        }
+        
+
     }
 
     private void PlayerFind()
@@ -65,13 +75,33 @@ public class Rat : MonoBehaviour
         transform.localScale = Scale;
     }
 
-    private IEnumerator JumpStop()
+    private void Jump()
     {
-        yield return new WaitForSeconds(1);
-        float target = Scale.x;
-        velocity.y = Jumppower;
-        velocity.x = target * m_moveSpeed;
-        Debug.Log(velocity);
-        m_rb.velocity = velocity;
+        //yield return new WaitForSeconds(1);
+        //float target = Scale.x;
+        //velocity.y = Jumppower;
+        //velocity.x = target * m_moveSpeed;
+        //Debug.Log(velocity);
+        //m_rb.velocity = velocity;
+        m_ani.SetBool("Jump",true);
+        Vector2 vero = (Vector2)this.transform.right * m_moveSpeed * transform.localScale.x + Vector2.up * Jumppower;
+        m_rb.velocity = vero;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == ("Ground"))
+        {
+            m_isGround = true;
+            m_ani.SetBool("Jump", false);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == ("Ground"))
+        {
+            m_isGround = false;
+        }
     }
 }
