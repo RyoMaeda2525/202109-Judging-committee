@@ -16,15 +16,12 @@ public class MoveManeger : MonoBehaviour
     /// <summary>床のレイヤー</summary>
     [SerializeField] LayerMask m_groundLayer = 0;
     Rigidbody2D m_rb = default;
-    SpriteRenderer sp = default;
-    public bool left = false;
     Vector2 migi = Vector2.right;
 
     // Start is called before the first frame update
     void Start()
     {
         m_rb = GetComponent<Rigidbody2D>();
-        sp = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

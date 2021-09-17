@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     public Vector3 scale = default;
     public int a = 0;
     public bool m_Attack = false;
+    int t = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +72,7 @@ public class PlayerManager : MonoBehaviour
             anim.SetBool("Jump", false);
             j = 0;
         }
-        if(isGround == false)
+        if (isGround == false)
         {
             anim.SetBool("Jump", true);
         }
@@ -80,7 +81,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (m_Attack == false)
             {
-                StartCoroutine(AttackStart()); 
+                AttackStart();
             }
         }
     }
@@ -109,26 +110,26 @@ public class PlayerManager : MonoBehaviour
         walkForce += speed;
     }
 
-    private IEnumerator AttackStart()
+    private void AttackStart()
     {
         m_Attack = true;
         anim.SetBool("isAttack", true);
-        yield return new WaitForSeconds(1f);
     }
 
-    
+
     public void Attack()
     {
         if (m_bulletLimit == 0 || Bullet.GetComponentsInChildren<DaggerManager>().Length < m_bulletLimit)    // 画面内の弾数を制限する
         {
             GameObject go = Instantiate(m_bulletPrefab, this.m_muzzle.position, Quaternion.identity);
-            go.transform.SetParent(Bullet.transform); 
+            go.transform.SetParent(Bullet.transform);
         }
     }
 
     public void AttackCoolDown()
     {
-        Debug.Log("a");
+        t += 1;
+        Debug.Log(t);
         anim.SetBool("isAttack", false);
         m_Attack = false;
     }
