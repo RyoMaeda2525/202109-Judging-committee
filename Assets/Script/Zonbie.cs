@@ -45,7 +45,6 @@ public class EnemyHP : MonoBehaviour
             StartCoroutine(ColorChange());
             GetComponent<CapsuleCollider2D>().enabled = false;
             m_rb.gravityScale = 0;
-            move.m_moveSpeed = 0;
         }
     }
 

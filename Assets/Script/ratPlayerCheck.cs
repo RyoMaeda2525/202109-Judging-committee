@@ -4,52 +4,21 @@ using UnityEngine;
 
 public class ratPlayerCheck : MonoBehaviour
 {
-    private string plyerTag = "Player";
-    bool plyerStay = false;
-    public bool isPlayerStay, isPlayerExit;
-    // Start is called before the first frame update
-    void Start()
+    bool m_isPlayerFound = false;
+    public bool IsPlayerFound { get { return m_isPlayerFound; } }
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public bool PlayerInOut()
-    {
-        if (isPlayerStay)
+        if (collision.gameObject.tag == "Player")
         {
-            plyerStay = true;
-        }
-        else if(isPlayerExit)
-        {
-            plyerStay = false;
-        }
-        isPlayerStay = false;
-        isPlayerExit = false;
-        return plyerStay;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.tag == plyerTag)
-        {
-            isPlayerStay = true;
-        }
-        
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == plyerTag)
-        {
-            isPlayerExit = true;
+            m_isPlayerFound = true;
         }
     }
-
     
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            m_isPlayerFound = false;
+        }
+    }
 }
