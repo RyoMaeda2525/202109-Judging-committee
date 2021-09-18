@@ -9,6 +9,8 @@ TagManager:
   - PlayerMirrar
   - Bullet
   - Enemy
+  - Fly
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -24,10 +26,10 @@ TagManager:
   - Dagger
   - Zonbie
   - Rat
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Ghost
+  - Furfly
+  - EnemyBullet
   - 
   - 
   - 
