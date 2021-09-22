@@ -80,7 +80,7 @@ public class Ghost : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Wall")
         {
             Vector3 scale = transform.localScale;
             if (scale.x == -1)

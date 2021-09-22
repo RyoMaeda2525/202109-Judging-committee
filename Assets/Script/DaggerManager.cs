@@ -9,6 +9,8 @@ public class DaggerManager : MonoBehaviour
     Rigidbody2D m_rb = default;
     public GameObject[] Player;
     public Vector3 scale = default;
+    public int m_damage = 4;
+
     //Transform a = default;
 
     // Start is called before the first frame update
@@ -48,11 +50,11 @@ public class DaggerManager : MonoBehaviour
     {
         if (collider.gameObject.tag == "Enemy")
          {
-            collider.gameObject.GetComponent<EnemyHP>().Damage(1);
+            collider.gameObject.GetComponent<EnemyHP>().Damage(m_damage);
             GameObject.Destroy(gameObject);
 
         }
-        if (collider.gameObject.tag == "Ground")
+        if (collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Ground")
         GameObject.Destroy(gameObject);
     }
 }
