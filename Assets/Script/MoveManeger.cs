@@ -39,14 +39,14 @@ public class MoveManeger : MonoBehaviour
         RaycastHit2D hit2 = Physics2D.Raycast(this.transform.position, m_rayForGround, m_rayForGround.magnitude, m_groundLayer);
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, m_rayForWall, m_rayForWall.magnitude, m_wallLayer);   // hit には ray の衝突情報が入っている
         Vector2 dir = Vector2.zero; // dir は速度ベクトル
-        if (hit.collider)
-        {
-            migi = new Vector2(migi.x * -1, migi.y);
-            m_rayForWall *= -1;
-            m_rayForGround.x *= -1;
+        //if (hit.collider)
+        //{
+        //    migi = new Vector2(migi.x * -1, migi.y);
+        //    m_rayForWall *= -1;
+        //    m_rayForGround.x *= -1;
 
-        }
-        if (!hit2.collider)
+        //}
+        if (!hit2.collider || hit.collider)
         {
             migi = new Vector2(migi.x * -1, migi.y);
             m_rayForWall *= -1;

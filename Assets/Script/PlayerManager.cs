@@ -6,24 +6,29 @@ public class PlayerManager : MonoBehaviour
 {
     Rigidbody2D m_rb = default;
     [SerializeField] GameObject m_bulletPrefab = default;
+    [SerializeField] GameObject m_bulletPrefab2 = default;
+    [SerializeField] GameObject m_bulletPrefabReinforcement = default;
+    [SerializeField] GameObject m_bulletPrefabReinforcement2 = default;
     public float walkForce = 0.85f; //スピード
     public float flyForce = 2.5f; //ジャンプ力
     [Range(0, 1)] public float sliding = 0.9f; //スライドモーション
     public GroundCheck ground;//接地判定用object
     public bool isGround = false;//接地判定
     private Animator anim = default;
-    public GameObject Bullet = default;
+    public GameObject Bullet = default;  
     [SerializeField] Transform m_muzzle = default;
     [SerializeField, Range(0, 10)] int m_bulletLimit = 0;
-    private int j = 0;//ジャンプカウンター
+    public int jumpCount = 0;//ジャンプカウンター
     Transform m_tra = default;
-    public LayerMask whatIsGround;
     public bool GroundCheck = false;
     private bool isGroundCheck = false;
     public Vector3 scale = default;
-    public int a = 0;
+    public int dagerCount = 0;
+    public int dagerReinforcementCount = 0;
     public bool m_Attack = false;
-    int t = 0;
+    public PlayerHp playerhp = default;
+    public GameManager gm = default;
+    bool m_AttackRapidfire = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,55 +41,58 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        a = this.GetComponentsInChildren<DaggerManager>().Length;
+        dagerCount = Bullet.transform.GetComponentsInChildren<DaggerManager>().Length;
+        dagerReinforcementCount = Bullet.transform.GetComponentsInChildren<DaggerReinforcementManager>().Length;
         isGround = ground.IsGround();
         float h = Input.GetAxisRaw("Horizontal");
         Vector2 v = GetComponent<Rigidbody2D>().velocity;
         Vector2 velocity = m_rb.velocity;
-        if (h != 0)
+        if (playerhp.i == 0)
         {
-            anim.SetBool("walk", true);
-            // 左右の移動
-            m_rb.velocity = new Vector2(h * walkForce, v.y);
-            m_tra.localScale = new Vector2(Mathf.Sign(h), transform.localScale.y);
-            Vector2 f = new Vector2(h, 0).normalized * walkForce;
-            m_rb.AddForce(f);
-        }
-        else
-        {
-            // スライドモーション
-            GetComponent<Rigidbody2D>().velocity = new Vector2(v.x * sliding, v.y);
-            anim.SetBool("walk", false);
-
-        }
-        if (Input.GetButtonDown("Jump"))
-        {
-            if (j <= 0)
+            if (h != 0)
             {
-                velocity.y = flyForce;
-                m_rb.velocity = velocity;
-                j += 1;
+                anim.SetBool("walk", true);
+                // 左右の移動
+                m_rb.velocity = new Vector2(h * walkForce, v.y);
+                m_tra.localScale = new Vector2(Mathf.Sign(h), transform.localScale.y);
+                Vector2 f = new Vector2(h, 0).normalized * walkForce;
+                m_rb.AddForce(f);
+            }
+            else
+            {
+                // スライドモーション
+                GetComponent<Rigidbody2D>().velocity = new Vector2(v.x * sliding, v.y);
+                anim.SetBool("walk", false);
+
+            }
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (jumpCount <= 0)
+                {
+                    velocity.y = flyForce;
+                    m_rb.velocity = velocity;
+                    jumpCount += 1;
+                }
+
+            }
+            if (isGround == true)
+            {
+                anim.SetBool("Jump", false);
+                jumpCount = 0;
+            }
+            if (isGround == false)
+            {
+                anim.SetBool("Jump", true);
             }
 
-        }
-        if (isGround == true)
-        {
-            anim.SetBool("Jump", false);
-            j = 0;
-        }
-        if (isGround == false)
-        {
-            anim.SetBool("Jump", true);
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (m_Attack == false)
+            if (Input.GetButtonDown("Fire1"))
             {
-                AttackStart();
+                    //AttackStart();
+                anim.SetBool("isAttack", true);
             }
         }
     }
+
     public bool Floor()
     {
         if (isGroundCheck)
@@ -101,7 +109,6 @@ public class PlayerManager : MonoBehaviour
         if (collision.tag == "GroundCheck")
         {
             isGroundCheck = true;
-
         }
     }
 
@@ -112,25 +119,48 @@ public class PlayerManager : MonoBehaviour
 
     private void AttackStart()
     {
-        m_Attack = true;
+        //m_Attack = true;
         anim.SetBool("isAttack", true);
     }
 
 
     public void Attack()
     {
-        if (m_bulletLimit == 0 || Bullet.GetComponentsInChildren<DaggerManager>().Length < m_bulletLimit)    // 画面内の弾数を制限する
+        if (m_bulletLimit == 0 || dagerCount + dagerReinforcementCount < m_bulletLimit)    // 画面内の弾数を制限する
         {
-            GameObject go = Instantiate(m_bulletPrefab, this.m_muzzle.position, Quaternion.identity);
-            go.transform.SetParent(Bullet.transform);
+             if (gm.m_life == 3 && jumpCount != 0)
+            {
+                Debug.Log("a");
+                GameObject go4 = Instantiate(m_bulletPrefabReinforcement2, this.m_muzzle.position, Quaternion.identity);
+                go4.transform.SetParent(Bullet.transform);
+            }
+            else if (gm.m_life == 3)
+            {
+                GameObject go3 = Instantiate(m_bulletPrefabReinforcement, this.m_muzzle.position, Quaternion.identity);
+                go3.transform.SetParent(Bullet.transform);
+            }
+            else if (jumpCount != 0)
+            {
+                GameObject go2 = Instantiate(m_bulletPrefab2, this.m_muzzle.position, Quaternion.identity);
+                go2.transform.SetParent(Bullet.transform);
+            }
+            else
+            {
+                GameObject go = Instantiate(m_bulletPrefab, this.m_muzzle.position, Quaternion.identity);
+                go.transform.SetParent(Bullet.transform);
+            }
         }
+        //m_Attack = false;
     }
 
     public void AttackCoolDown()
     {
-        t += 1;
-        Debug.Log(t);
-        anim.SetBool("isAttack", false);
-        m_Attack = false;
+        //m_Attack = false;
+        //anim.SetBool("isAttack", false);
+    }
+
+    public void Dead()
+    {
+        anim.Play("Dead");
     }
 }

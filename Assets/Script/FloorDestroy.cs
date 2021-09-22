@@ -20,7 +20,6 @@ public class FloorDestroy : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            Debug.Log("a");
             GameObject.Destroy(gameObject);
         }
     }

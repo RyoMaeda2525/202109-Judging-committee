@@ -16,9 +16,10 @@ public class Rat : MonoBehaviour
     private Vector3 Scale = default;
     private Vector2 velocity = default;
     [SerializeField] float m_detectDelaySeconds = 1f;
-    float m_timer = 0f;
+    public float m_timer = 1f;
     bool m_isGround = false;
     Animator m_ani = default;
+    public bool PlayerFound = false; 
 
         void Start()
     {
@@ -35,16 +36,23 @@ public class Rat : MonoBehaviour
         if (m_PlayerCheck.IsPlayerFound)
         {
             m_timer += Time.deltaTime;
-
-            if(m_timer > m_detectDelaySeconds && m_isGround)
+            m_ani.SetBool("JumpPreparation", true);
+            if (m_timer > m_detectDelaySeconds && m_isGround)
             {
                 m_timer = 0;
+                PlayerFound = true;
                 Jump();
             }
+        }
+        else if(m_timer > 0 && PlayerFound == false)
+        {
+            m_timer = 1;
+            m_ani.SetBool("JumpPreparation", false);
         }
         else if(m_timer > 0)
         {
             m_timer = 0;
+            m_ani.SetBool("JumpPreparation", false);
         }
         
 

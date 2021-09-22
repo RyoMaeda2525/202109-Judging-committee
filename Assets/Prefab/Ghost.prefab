@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8014791641205983695}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.516, y: -0.152, z: 0}
+  m_LocalPosition: {x: 1.516, y: -0.152, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,7 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145db08ca72707845b8fe71818f2bb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myHealth: 5
+  myHealth: 9
+  m_RatCheck: {fileID: 0}
+  m_Damage: 0
 --- !u!50 &8014791641205983681
 Rigidbody2D:
   serializedVersion: 4
