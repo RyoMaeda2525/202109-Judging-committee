@@ -15,6 +15,9 @@ TagManager:
   - Ground2
   - Boss1
   - Boom
+  - BossMotion
+  - Cinema1
+  - BossGround
   layers:
   - Default
   - TransparentFX

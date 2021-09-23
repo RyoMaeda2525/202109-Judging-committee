@@ -15,6 +15,7 @@ public class MoveManeger : MonoBehaviour
     [SerializeField] Vector2 m_rayForGround = Vector2.zero;
     /// <summary>床のレイヤー</summary>
     [SerializeField] LayerMask m_groundLayer = 0;
+    [SerializeField] LayerMask m_FloorgroundLayer = 0;
     Rigidbody2D m_rb = default;
     Vector2 migi = Vector2.right;
 
@@ -36,8 +37,8 @@ public class MoveManeger : MonoBehaviour
         Debug.DrawLine(origin, origin + m_rayForWall);  // ray（光線）を Scene 上に描く
         Debug.DrawLine(origin, origin + m_rayForGround);    // ray を Scene 上に描く
         // Raycast して床の検出を試みる
-        RaycastHit2D hit2 = Physics2D.Raycast(this.transform.position, m_rayForGround, m_rayForGround.magnitude, m_groundLayer);
-        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, m_rayForWall, m_rayForWall.magnitude, m_wallLayer);   // hit には ray の衝突情報が入っている
+        RaycastHit2D hit2 = Physics2D.Raycast(this.transform.position, m_rayForGround, m_rayForGround.magnitude,m_groundLayer + m_FloorgroundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position ,m_rayForWall, m_rayForWall.magnitude, m_wallLayer);   // hit には ray の衝突情報が入っている
         Vector2 dir = Vector2.zero; // dir は速度ベクトル
         //if (hit.collider)
         //{

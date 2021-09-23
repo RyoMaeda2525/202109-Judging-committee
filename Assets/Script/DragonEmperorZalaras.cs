@@ -13,7 +13,10 @@ public class DragonEmperorZalaras : MonoBehaviour
     private SpriteRenderer[] sp = default;
     int Dethpoint = 0;
     [SerializeField] GameObject m_bulletPrefab = default;
+    [SerializeField] Transform m_muzzle = default;
     public int firecount = 3;
+    public float fireInterval = 3;
+    bool firecooldown = false;
     float timer = 0;
 
     // Start is called before the first frame update
@@ -21,6 +24,7 @@ public class DragonEmperorZalaras : MonoBehaviour
     {
         ani = GetComponent<Animator>();
         sp = GetComponentsInChildren<SpriteRenderer>();
+        //ani.Play("Start");
     }
 
     // Update is called once per frame
@@ -29,15 +33,17 @@ public class DragonEmperorZalaras : MonoBehaviour
         switch (nowState)  //←nowStateには現在の状態が入っている
         {
             case BossState.StartEnsyutu:
-                ani.Play("Start");
-                nowState = BossState.Battle;
                 break;
             case BossState.Battle:
-                timer += Time.deltaTime;
-                if (timer >= 3)
+                if (!firecooldown)
                 {
-                    Fire();
-                    timer = 0;
+                    timer += Time.deltaTime;
+                    if (timer >= 3)
+                    {
+                        firecooldown = true;
+                        ani.Play("Fire");
+                        timer = 0;
+                    }
                 }
                 if (m_Damage)
                 {
@@ -48,7 +54,6 @@ public class DragonEmperorZalaras : MonoBehaviour
                     {
                         list[i].color = new Color(1f, 1f, 1f, level);
                     }
-                    //sp.color = new Color(1f, 1f, 1f, level);
                 }
                 break;
             case BossState.ClearEnsyutu:
@@ -59,11 +64,8 @@ public class DragonEmperorZalaras : MonoBehaviour
 
     public void Fire()
     {
-        //for(int i = 0; i < firecount; i++)
-        //{
         playerpos = GameObject.FindWithTag("Player").transform.position;
-        Instantiate(m_bulletPrefab, this.transform.position, Quaternion.identity);
-        //}  
+        Instantiate(m_bulletPrefab, m_muzzle.transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -96,6 +98,7 @@ public class DragonEmperorZalaras : MonoBehaviour
 
     public void Damage(int damage)
     {
+        if(!m_Damage)
         myHealth -= damage;
         m_Damage = true;
         StartCoroutine(IsDamage());
@@ -105,7 +108,7 @@ public class DragonEmperorZalaras : MonoBehaviour
     {
         var list = new List<SpriteRenderer>();
         list.AddRange(sp);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.3f);
         m_Damage = false;
         for (int i = 0; i < list.Count; i++)
         {
@@ -113,4 +116,11 @@ public class DragonEmperorZalaras : MonoBehaviour
 
         }
     }
+
+    public void CoolDown()
+    {
+        Debug.Log("b");
+        firecooldown = false;
+    }
+
 }

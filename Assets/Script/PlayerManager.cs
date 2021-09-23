@@ -28,7 +28,9 @@ public class PlayerManager : MonoBehaviour
     public bool m_Attack = false;
     public PlayerHp playerhp = default;
     public GameManager gm = default;
-    bool m_AttackRapidfire = false;
+    private bool m_AttackRapidfire = false;
+    private bool isBossGround = false;
+    private bool BossGroundCheck = false;
 
     // Start is called before the first frame update
     void Start()
@@ -103,12 +105,28 @@ public class PlayerManager : MonoBehaviour
         return GroundCheck;
     }
 
+    public bool BossFloor()
+    {
+        if (isBossGround)
+        {
+            BossGroundCheck = true;
+        }
+        isBossGround = false;
+        return  BossGroundCheck;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "GroundCheck")
-        {
+        { 
+            Destroy(collision.gameObject);
             isGroundCheck = true;
+        }
+        if(collision.tag == "BossGround")
+        {
+            Debug.Log("a");
+            Destroy(collision.gameObject);
+            isBossGround = true;
         }
     }
 
@@ -162,4 +180,7 @@ public class PlayerManager : MonoBehaviour
     {
         anim.Play("Dead");
     }
+
+    
+
 }
