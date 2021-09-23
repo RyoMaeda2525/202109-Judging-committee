@@ -35,26 +35,31 @@ public class EnemyHP : MonoBehaviour
 
     public void Damage(int damage)
     {
-        myHealth -= damage;
-        m_Damage = true;
-        StartCoroutine(IsDamage());
-        if (myHealth <= 0)
+        if (!m_Damage)
         {
-            StartCoroutine(ColorChange());
-            Dethpoint = 1;
-            m_rb.gravityScale = 0;
+            myHealth -= damage;
+            m_Damage = true;
+            StartCoroutine(IsDamage());
+            if (myHealth <= 0)
+            {
+                StartCoroutine(ColorChange());
+                Dethpoint = 1;
+                m_rb.gravityScale = 0;
+            }
         }
+        
     }
 
     public IEnumerator IsDamage()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.3f);
         m_Damage = false;
         sp.color = new Color(1f, 1f, 1f, 1f);
     }
 
     public IEnumerator ColorChange()
     {
+        Debug.Log("b");
         m_rb.gravityScale = 0;
         GetComponent<Animator>().Play("Deth");
         yield return new WaitForSeconds(1f);
