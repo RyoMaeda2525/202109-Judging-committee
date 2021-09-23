@@ -18,6 +18,8 @@ TagManager:
   - BossMotion
   - Cinema1
   - BossGround
+  - GameObjectDestroy
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -40,8 +42,8 @@ TagManager:
   - DragonEmperorZalaras
   - FireBallEffect
   - FloorGround
-  - 
-  - 
+  - EnemyDestroy
+  - PlayerDestroy
   - 
   - 
   - 

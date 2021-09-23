@@ -33398,7 +33398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8229867391373764626}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.1, z: -11.201746}
+  m_LocalPosition: {x: 0, y: -0.1875, z: -11.201746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6139001148972497142}
@@ -33443,7 +33443,7 @@ MonoBehaviour:
   m_speed: 0.5
   pushOnAwake: 1
   startDirection: {x: 0, y: 0, z: 0}
-  m_moveSpeed: 0.65
+  m_moveSpeed: 0.75
   dethtimer: 6
   fieryEffect: {fileID: 8445198600463694147}
   smokeEffect: {fileID: 2528875380153505772}
