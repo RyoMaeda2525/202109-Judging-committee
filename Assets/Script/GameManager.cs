@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         m_score += score;
         if (m_scoreText)
         {
-            m_scoreText.text = "Score: " + m_score; // 10桁でゼロ埋め (zero padding) する
+            m_scoreText.text = "Score: " + m_score .ToString("d10"); // 10桁でゼロ埋め (zero padding) する
         }
     }
 

@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zonbie : MonoBehaviour
+public class EnemyHP : MonoBehaviour
 {
     Rigidbody2D m_rb = default;
     private MoveManeger move;
     float m_speed = 0.01f;
     float n_speed = 0.01f;
+    [SerializeField] int m_score = 100;
     public int myHealth = 1;
-
-    SpriteRenderer SpriteRenderer;
+    public Transform m_RatCheck = default;
+    public bool m_Damage = false;
+    private SpriteRenderer sp = default;
     // Start is called before the first frame update
+    int Dethpoint = 0;
+
     void Start()
     {
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        sp = GetComponent<SpriteRenderer>();
         m_rb = GetComponent<Rigidbody2D>();
         move = GetComponent<MoveManeger>();
     }
@@ -22,43 +26,65 @@ public class Zonbie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (m_Damage)
+        {
+            float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
+            sp.color = new Color(1f, 1f, 1f, level);
+        }
     }
 
     public void Damage(int damage)
     {
         myHealth -= damage;
+        m_Damage = true;
+        StartCoroutine(IsDamage());
         if (myHealth <= 0)
         {
             StartCoroutine(ColorChange());
-            GetComponent<CapsuleCollider2D>().enabled = false;
+            Dethpoint = 1;
             m_rb.gravityScale = 0;
-            move.m_moveSpeed = 0;
         }
+    }
+
+    public IEnumerator IsDamage()
+    {
+        yield return new WaitForSeconds(3f);
+        m_Damage = false;
+        sp.color = new Color(1f, 1f, 1f, 1f);
     }
 
     public IEnumerator ColorChange()
     {
+        m_rb.gravityScale = 0;
         GetComponent<Animator>().Play("Deth");
         yield return new WaitForSeconds(1f);
+        GameManager gm = FindObjectOfType<GameManager>();
+        if (gm)
+        {
+            gm.AddScore(m_score);
+        }
         GameObject.Destroy(gameObject);
     }
 
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
-        //if (collision.gameObject.tag == "Player")
-        //{
-        //    collision.gameObject.GetComponent<PlayerHp>().Damage();
-        //}
-
+        if (this.gameObject.name == "rat" && collision.tag == "Player")
+        {
+            m_RatCheck.GetComponent<ratPlayerCheck>().hit();
+        }
+        else if (collision.gameObject.tag == "Player" && Dethpoint == 0)
+        {
+            collision.gameObject.GetComponent<PlayerHp>().Damage();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.gameObject.tag == "Player")
-        //{
-        //    collision.gameObject.GetComponent<PlayerHp>().Damage();
-        //}
+        if (collision.gameObject.tag == "Player" && Dethpoint == 0)
+        {
+            collision.gameObject.GetComponent<PlayerHp>().Damage();
+        }
     }
 }

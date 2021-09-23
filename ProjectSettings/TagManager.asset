@@ -13,6 +13,8 @@ TagManager:
   - EnemyBullet
   - Wall
   - Ground2
+  - Boss1
+  - Boom
   layers:
   - Default
   - TransparentFX
@@ -32,9 +34,9 @@ TagManager:
   - Ghost
   - Furfly
   - EnemyBullet
-  - 
-  - 
-  - 
+  - DragonEmperorZalaras
+  - FireBallEffect
+  - FloorGround
   - 
   - 
   - 

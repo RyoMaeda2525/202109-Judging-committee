@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8014791641205983683}
   - component: {fileID: 8014791641205983681}
   - component: {fileID: 8014791641205983680}
+  - component: {fileID: 2754655981754080770}
   m_Layer: 15
   m_Name: Ghost
   m_TagString: Enemy
@@ -131,10 +132,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8014791641205983695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 145db08ca72707845b8fe71818f2bb07, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c2421dc6df6554448d0e6891ea69f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myHealth: 9
+  m_score: 200
+  myHealth: 10
   m_RatCheck: {fileID: 0}
   m_Damage: 0
 --- !u!50 &8014791641205983681
@@ -165,7 +167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8014791641205983695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7b927b48ef7f33429d9f8459ce30dfb, type: 3}
   m_Name: 
@@ -178,3 +180,18 @@ MonoBehaviour:
   m_wallLayer:
     serializedVersion: 2
     m_Bits: 16384
+--- !u!114 &2754655981754080770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014791641205983695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1db7dbf1083604090c249d23430883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.3
+  frequency: 1
+  magnitude: 1
