@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5227011629145094312}
   - component: {fileID: 5227011629145094314}
   - component: {fileID: 5227011629145094315}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011629398562601}
   m_Bounds:
-    m_Center: {x: 0.15107939, y: -0.26781863, z: 0}
+    m_Center: {x: 0.1510782, y: -0.26782054, z: 0}
     m_Extent: {x: 0.54000014, y: 0.34249502, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -113,7 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011629192996334}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 5227011629242499131}
   - component: {fileID: 5227011629242499133}
   - component: {fileID: 5227011629242499130}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630165294059}
   m_Bounds:
-    m_Center: {x: 0.006340027, y: 0.015063047, z: 0}
+    m_Center: {x: 0.006340027, y: 0.015064001, z: 0}
     m_Extent: {x: 1.8938951, y: 1.7710624, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 5227011629244157092}
   - component: {fileID: 5227011629244157094}
   - component: {fileID: 5227011629244157095}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630804060576}
   m_Bounds:
-    m_Center: {x: -0.046835124, y: -0.0036199093, z: 0}
+    m_Center: {x: -0.0468356, y: -0.003620863, z: 0}
     m_Extent: {x: 0.36399573, y: 0.271336, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -351,7 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011629391519728}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011629398562601}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 5227011629403768562}
   - component: {fileID: 5227011629403768564}
   - component: {fileID: 5227011629403768565}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011629192996334}
   m_Bounds:
-    m_Center: {x: 0.00019359589, y: -0.054635286, z: 0}
+    m_Center: {x: 0.00019311905, y: -0.054635286, z: 0}
     m_Extent: {x: 1.2555432, y: 1.457168, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 5227011629456234996}
   - component: {fileID: 5227011629456234998}
   - component: {fileID: 5227011629456234999}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630691042894}
   m_Bounds:
-    m_Center: {x: -0.0015048981, y: 0.032059908, z: 0}
+    m_Center: {x: -0.0015046597, y: 0.032061815, z: 0}
     m_Extent: {x: 0.5100002, y: 0.61665034, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -623,7 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011629473972447}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011629597155429}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 5227011629598515411}
   - component: {fileID: 5227011629598515413}
   - component: {fileID: 5227011629598515410}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630940961000}
   m_Bounds:
-    m_Center: {x: -0.021247745, y: 0.049474, z: 0}
+    m_Center: {x: -0.021249413, y: 0.049470186, z: 0}
     m_Extent: {x: 1.3155322, y: 0.74850893, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 5227011629599874018}
   - component: {fileID: 5227011629599874020}
   - component: {fileID: 5227011629599874021}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -880,7 +880,7 @@ MonoBehaviour:
   - {fileID: 5227011630217998247}
   - {fileID: 5227011629391519728}
   m_Bounds:
-    m_Center: {x: 0.027779698, y: -0.0074815154, z: 0}
+    m_Center: {x: 0.027783036, y: -0.007479608, z: 0}
     m_Extent: {x: 0.5544049, y: 0.77515525, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 5227011629621145334}
   - component: {fileID: 5227011629621145320}
   - component: {fileID: 5227011629621145321}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,7 +984,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630264105889}
   m_Bounds:
-    m_Center: {x: -0.13173252, y: 0.17348126, z: 0}
+    m_Center: {x: -0.131733, y: 0.17348126, z: 0}
     m_Extent: {x: 0.48906338, y: 0.32831836, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -999,7 +999,7 @@ GameObject:
   - component: {fileID: 5227011629640852974}
   - component: {fileID: 5227011629640852960}
   - component: {fileID: 5227011629640852961}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011629597155429}
   m_Bounds:
-    m_Center: {x: 0.028077602, y: -0.07797909, z: 0}
+    m_Center: {x: 0.028078198, y: -0.07798004, z: 0}
     m_Extent: {x: 0.30692518, y: 0.42500025, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 5227011629703526399}
   - component: {fileID: 5227011629703526385}
   - component: {fileID: 5227011629703526398}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630949086881}
   m_Bounds:
-    m_Center: {x: -0.059584975, y: 0.0000019073486, z: 0}
+    m_Center: {x: -0.059585094, y: 0, z: 0}
     m_Extent: {x: 0.32427508, y: 0.5600002, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1206,7 +1206,7 @@ GameObject:
   - component: {fileID: 5227011630115018788}
   - component: {fileID: 5227011630115018790}
   - component: {fileID: 5227011630115018791}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630978816676}
   m_Bounds:
-    m_Center: {x: -0.05655697, y: -0.02462992, z: 0}
+    m_Center: {x: -0.056559592, y: -0.024632782, z: 0}
     m_Extent: {x: 0.2835181, y: 0.4071679, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1308,7 +1308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630165294059}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1340,7 +1340,7 @@ GameObject:
   - component: {fileID: 5227011630201159758}
   - component: {fileID: 5227011630201159744}
   - component: {fileID: 5227011630201159745}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1429,7 +1429,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011629473972447}
   m_Bounds:
-    m_Center: {x: -0.041107476, y: -0.018729597, z: 0}
+    m_Center: {x: -0.041106522, y: -0.018729597, z: 0}
     m_Extent: {x: 0.37830675, y: 0.44869196, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1442,7 +1442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630217998247}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1478,7 +1478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630264105889}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1509,7 +1509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630539522552}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1539,7 +1539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630691042894}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1569,7 +1569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630797283623}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,7 +1599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630804060576}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1632,7 +1632,7 @@ GameObject:
   - component: {fileID: 5227011630871882853}
   - component: {fileID: 5227011630871882855}
   - component: {fileID: 5227011630871882852}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_21 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630797283623}
   m_Bounds:
-    m_Center: {x: -0.16822726, y: -0.2941603, z: 0}
+    m_Center: {x: -0.16822964, y: -0.29416412, z: 0}
     m_Extent: {x: 0.34934253, y: 0.4564386, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1734,7 +1734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630940961000}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1764,7 +1764,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630949086881}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1794,7 +1794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227011630978816676}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1829,7 +1829,7 @@ GameObject:
   - component: {fileID: 5227011631035611623}
   - component: {fileID: 5227011631035611622}
   - component: {fileID: 5227011631035611545}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Dragon Emperor Zalaras
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1914,6 +1914,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bca369d115bb14d9b1bf8072d7b8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myHealth: 1
+  m_Damage: 0
+  m_bulletPrefab: {fileID: 57165341819000668, guid: ff94302680267de4887ed607c3dade41,
+    type: 3}
+  firecount: 3
 --- !u!1 &5227011631281923969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1925,7 +1930,7 @@ GameObject:
   - component: {fileID: 5227011631281923968}
   - component: {fileID: 5227011631281923970}
   - component: {fileID: 5227011631281923971}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Zalaras_tex3_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2014,7 +2019,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5227011630539522552}
   m_Bounds:
-    m_Center: {x: 1.5226424, y: -3.516849, z: 0}
+    m_Center: {x: 1.5226443, y: -3.516851, z: 0}
     m_Extent: {x: 0.13884014, y: 0.12178004, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1

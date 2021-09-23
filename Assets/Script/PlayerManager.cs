@@ -130,7 +130,6 @@ public class PlayerManager : MonoBehaviour
         {
              if (gm.m_life == 3 && jumpCount != 0)
             {
-                Debug.Log("a");
                 GameObject go4 = Instantiate(m_bulletPrefabReinforcement2, this.m_muzzle.position, Quaternion.identity);
                 go4.transform.SetParent(Bullet.transform);
             }

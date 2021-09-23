@@ -52,9 +52,13 @@ public class DaggerManager : MonoBehaviour
          {
             collider.gameObject.GetComponent<EnemyHP>().Damage(m_damage);
             GameObject.Destroy(gameObject);
-
         }
-        if (collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Ground")
+        if (collider.gameObject.tag == "Boss1")
+        {
+            collider.gameObject.GetComponent<DragonEmperorZalaras>().Damage(m_damage);
+            GameObject.Destroy(gameObject);
+        }
+            if (collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Ground")
         GameObject.Destroy(gameObject);
     }
 }

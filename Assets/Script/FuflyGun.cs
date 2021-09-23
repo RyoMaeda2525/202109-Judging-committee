@@ -29,7 +29,6 @@ public class FuflyGun : MonoBehaviour
     void Fire()
     {
         playerpos = GameObject.FindWithTag("Player").transform.position;
-        Debug.Log("a");
         Instantiate(m_bulletPrefab, this.transform.position, Quaternion.identity);
     }
 }

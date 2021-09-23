@@ -43,7 +43,6 @@ public class FurflyBulletManager : MonoBehaviour
 
     private void destroy()
     {
-        Debug.Log("a");
         GameObject.Destroy(gameObject);
     }
 
