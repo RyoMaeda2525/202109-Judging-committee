@@ -22,14 +22,17 @@ public class DragonEmperorZalaras : MonoBehaviour
     Transform Spawn = default;
     GameManager m_game = default;
     AudioSource audio = default;
+    PlayerManager m_pla = default; 
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         m_game = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         Spawn = GetComponent<Transform>();
         ani = GetComponent<Animator>();
         sp = GetComponentsInChildren<SpriteRenderer>();
+        m_pla = GameObject.FindWithTag("Player").GetComponent<PlayerManager>();
         //ani.Play("Start");
     }
 

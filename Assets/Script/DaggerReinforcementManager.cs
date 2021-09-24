@@ -52,7 +52,12 @@ public class DaggerReinforcementManager : MonoBehaviour
         {
             collider.gameObject.GetComponent<EnemyHP>().Damage(m_damage);
         }
-        if (this.transform.position.x >= 3.5 || this.transform.position.x <= -2.85)
+        else if (collider.gameObject.tag == "Boss1")
+        {
+            collider.gameObject.GetComponent<DragonEmperorZalaras>().Damage(m_damage);
+            GameObject.Destroy(gameObject);
+        }
+        if (collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Ground")
             GameObject.Destroy(gameObject);
     }
 }

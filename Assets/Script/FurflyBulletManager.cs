@@ -37,6 +37,7 @@ public class FurflyBulletManager : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            collision.gameObject.GetComponent<PlayerHp>().Damage();
             destroy();
         }
     }

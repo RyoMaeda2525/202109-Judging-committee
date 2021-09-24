@@ -129,6 +129,9 @@ MonoBehaviour:
   m_groundLayer:
     serializedVersion: 2
     m_Bits: 1024
+  m_FloorgroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &8855475285752516128
 Rigidbody2D:
   serializedVersion: 4
@@ -178,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2421dc6df6554448d0e6891ea69f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_score: 100
+  m_score: 200
   myHealth: 1
   m_RatCheck: {fileID: 0}
   m_Damage: 0

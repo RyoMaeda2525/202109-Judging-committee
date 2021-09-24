@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     bool gameClear = false;
     bool IsFloorCheck = false;
     AudioSource audio = default;
+    [SerializeField] FadeOut m_Panal = default;
+    float colortimer = 0;
+    bool LifeCount = true;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +33,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IsFloorCheck = m_playerManager.BossFloor();
         if (!gameClear)
         {
             GameTimer += Time.deltaTime;
         }
         if (IsFloorCheck)
-            audio.Stop();
+        audio.Stop();
+        if(m_score  > 1)
+        {
+            if (m_score % 1000 == 0 && m_life <= 2 && LifeCount)
+            {
+                m_life += 1;
+                bool LifeCount = false;
+                m_LifeCounter.Refresh(m_life);
+            }
+        }
     }
+
 
     public void AddScore(int score)
     {
@@ -45,6 +57,7 @@ public class GameManager : MonoBehaviour
         if (m_scoreText)
         {
             m_scoreText.text = "Score: " + m_score .ToString("d10"); // 10桁でゼロ埋め (zero padding) する
+            LifeCount = true;       
         }
     }
 

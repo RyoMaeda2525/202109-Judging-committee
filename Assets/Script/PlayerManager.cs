@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -31,6 +32,12 @@ public class PlayerManager : MonoBehaviour
     private bool m_AttackRapidfire = false;
     private bool isBossGround = false;
     private bool BossGroundCheck = false;
+    [SerializeField] FadeOut m_panel = default;
+    float ColorChage = 0;
+    [SerializeField] GameObject m_light = default;
+    bool colorchange = false;
+    bool deth = false;
+    Vector2 velocity = default;
 
     // Start is called before the first frame update
     void Start()
@@ -48,51 +55,60 @@ public class PlayerManager : MonoBehaviour
         isGround = ground.IsGround();
         float h = Input.GetAxisRaw("Horizontal");
         Vector2 v = GetComponent<Rigidbody2D>().velocity;
-        Vector2 velocity = m_rb.velocity;
-        if (playerhp.i == 0)
+        velocity = m_rb.velocity;
+        if (!deth)
         {
-            if (h != 0)
+            if (playerhp.i == 0)
             {
-                anim.SetBool("walk", true);
-                // 左右の移動
-                m_rb.velocity = new Vector2(h * walkForce, v.y);
-                m_tra.localScale = new Vector2(Mathf.Sign(h), transform.localScale.y);
-                Vector2 f = new Vector2(h, 0).normalized * walkForce;
-                m_rb.AddForce(f);
-            }
-            else
-            {
-                // スライドモーション
-                GetComponent<Rigidbody2D>().velocity = new Vector2(v.x * sliding, v.y);
-                anim.SetBool("walk", false);
-
-            }
-            if (Input.GetButtonDown("Jump"))
-            {
-                if (jumpCount <= 0)
+                if (h != 0)
                 {
-                    velocity.y = flyForce;
-                    m_rb.velocity = velocity;
-                    jumpCount += 1;
+                    anim.SetBool("walk", true);
+                    // 左右の移動
+                    m_rb.velocity = new Vector2(h * walkForce, v.y);
+                    m_tra.localScale = new Vector2(Mathf.Sign(h), transform.localScale.y);
+                    Vector2 f = new Vector2(h, 0).normalized * walkForce;
+                    m_rb.AddForce(f);
+                }
+                else
+                {
+                    // スライドモーション
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(v.x * sliding, v.y);
+                    anim.SetBool("walk", false);
+
+                }
+                if (Input.GetButtonDown("Jump"))
+                {
+                    if (jumpCount <= 0)
+                    {
+                        velocity.y = flyForce;
+                        m_rb.velocity = velocity;
+                        jumpCount += 1;
+                    }
+
+                }
+                if (isGround == true)
+                {
+                    anim.SetBool("Jump", false);
+                    jumpCount = 0;
+                }
+                if (isGround == false)
+                {
+                    anim.SetBool("Jump", true);
                 }
 
-            }
-            if (isGround == true)
-            {
-                anim.SetBool("Jump", false);
-                jumpCount = 0;
-            }
-            if (isGround == false)
-            {
-                anim.SetBool("Jump", true);
-            }
-
-            if (Input.GetButtonDown("Fire1"))
-            {
+                if (Input.GetButtonDown("Fire1"))
+                {
                     //AttackStart();
-                anim.SetBool("isAttack", true);
+                    anim.SetBool("isAttack", true);
+                }
+
+                if (colorchange)
+                {
+                    ColorChage += Time.deltaTime;
+                }
             }
         }
+        
     }
 
     public bool Floor()
@@ -124,7 +140,6 @@ public class PlayerManager : MonoBehaviour
         }
         if(collision.tag == "BossGround")
         {
-            Debug.Log("a");
             Destroy(collision.gameObject);
             isBossGround = true;
         }
@@ -178,9 +193,20 @@ public class PlayerManager : MonoBehaviour
 
     public void Dead()
     {
+        Vector2 velocity = Vector2.zero;
+        deth = true;
         anim.Play("Dead");
     }
 
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
     
+    public void LightDeth()
+    {
+        Debug.Log("a");
+        Destroy(m_light);
+    }
 
 }
