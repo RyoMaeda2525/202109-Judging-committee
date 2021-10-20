@@ -17,27 +17,47 @@ public class GameManager : MonoBehaviour
     bool gameClear = false;
     bool IsFloorCheck = false;
     AudioSource audio = default;
+    [SerializeField] FadeOut m_Panal = default;
+    float colortimer = 0;
+    bool LifeCount = true;
+    bool bossClear = false;
+    bool healInterval = false;
 
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
+        m_life = 2;
         m_LifeCounter = GetComponent<LifeCounter>();
         m_LifeCounter.Refresh(m_life);
-        AddScore(0);
+        m_score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        IsFloorCheck = m_playerManager.BossFloor();
         if (!gameClear)
         {
             GameTimer += Time.deltaTime;
         }
         if (IsFloorCheck)
-            audio.Stop();
+        audio.Stop();
+        if(m_score  > 1 )
+        {
+            if (m_score % 1000 == 0 && m_life <= 2 && LifeCount && healInterval == false)
+            {
+                m_life += 1;
+                bool LifeCount = false;
+                m_LifeCounter.Refresh(m_life);
+                healInterval = true;
+            }
+            else if (m_score % 1000 != 0)
+            {
+                healInterval = false;
+            }
+        }   
     }
+
 
     public void AddScore(int score)
     {
@@ -45,22 +65,32 @@ public class GameManager : MonoBehaviour
         if (m_scoreText)
         {
             m_scoreText.text = "Score: " + m_score .ToString("d10"); // 10桁でゼロ埋め (zero padding) する
+            LifeCount = true;       
         }
     }
 
     public void PlayerDead()
     {
-        if(m_life != 1)
+        if (!bossClear)
         {
-            m_life -= 1;
-            m_LifeCounter.Refresh(m_life);
+            if (m_life != 1)
+            {
+                m_life -= 1;
+                m_LifeCounter.Refresh(m_life);
+                GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                m_life -= 1;
+                m_LifeCounter.Refresh(m_life);
+                m_playerManager.Dead();
+            }
         }
-        else
-        {
-            m_life -= 1;
-            m_LifeCounter.Refresh(m_life);
-            m_playerManager.Dead();
-        }
+    }
+
+    public void BossClear()
+    {
+        bossClear = true;
     }
 
     public void GameClear()

@@ -18,8 +18,15 @@ public class GameobjectDestroy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject a = collision.gameObject;
-        Debug.Log(a.name);
-        GameObject.Destroy(a);
+        if(collision.gameObject.tag == "Manager" || collision.gameObject.tag == "Player" || collision.gameObject.tag == "Ground")
+        {
+
+        }
+        else
+        {
+            GameObject a = collision.gameObject;
+            Debug.Log(a.name);
+            GameObject.Destroy(a);
+        }  
     }
 }

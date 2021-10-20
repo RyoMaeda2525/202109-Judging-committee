@@ -22,14 +22,17 @@ public class DragonEmperorZalaras : MonoBehaviour
     Transform Spawn = default;
     GameManager m_game = default;
     AudioSource audio = default;
+    PlayerManager m_pla = default; 
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         m_game = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         Spawn = GetComponent<Transform>();
         ani = GetComponent<Animator>();
         sp = GetComponentsInChildren<SpriteRenderer>();
+        m_pla = GameObject.FindWithTag("Player").GetComponent<PlayerManager>();
         //ani.Play("Start");
     }
 
@@ -78,6 +81,7 @@ public class DragonEmperorZalaras : MonoBehaviour
                 }
                 break;
             case BossState.ClearEnsyutu:
+                m_game.BossClear();
                 ani.Play("Deth");
                 break;
         }
@@ -137,7 +141,6 @@ public class DragonEmperorZalaras : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if(!m_Damage)
         myHealth -= damage;
         m_Damage = true;
         StartCoroutine(IsDamage());
@@ -152,7 +155,6 @@ public class DragonEmperorZalaras : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             list[i].color = new Color(1f, 1f, 1f, 1f);
-
         }
     }
 

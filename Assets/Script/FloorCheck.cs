@@ -1,37 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class FloorCheck : MonoBehaviour
 {
     public bool isFloor = false;
     public PlayerManager m_FloorCheck;
-    public bool IsFloorCheck = false; 
+    public bool IsFloorCheck = false;
     public GameObject[] floors;
     public int i = 0;
     public int start = 0;
     public int end = 2;
     public int ransu = 0;
     List<int> numbers = new List<int>();
-    List<int> numbersCheck = new List<int>();
     public GameObject bossPrefab = default;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = start; i <= end; i++)
+        for (int i = start; i < end; i++)
         {
             numbers.Add(i);
         }
     }
 
-        // Update is called once per frame
-        void Update()
+    // Update is called once per frame
+    void Update()
     {
         IsFloorCheck = m_FloorCheck.Floor();
         if (IsFloorCheck == true)
         {
-            if (numbers?.Count > 0)
+            if (numbers.Count > 0)
             {
                 Vector3 pos = this.transform.position;
                 pos.y += 3;
@@ -58,6 +58,6 @@ public class FloorCheck : MonoBehaviour
                 IsFloorCheck = false;
             }
         }
-        
+
     }
 }

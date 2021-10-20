@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveSpeed: 1.3
   m_upSpeed: 1
-  dethtimer: 6
+  dethtimer: 4.5
 --- !u!50 &6500266401727047677
 Rigidbody2D:
   serializedVersion: 4
@@ -161,7 +161,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.11493382, y: -0.17842865}

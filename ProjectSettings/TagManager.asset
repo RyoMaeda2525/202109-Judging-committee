@@ -20,6 +20,9 @@ TagManager:
   - BossGround
   - GameObjectDestroy
   - GameManager
+  - Manager
+  - Coin
+  - rat
   layers:
   - Default
   - TransparentFX
@@ -44,7 +47,7 @@ TagManager:
   - FloorGround
   - EnemyDestroy
   - PlayerDestroy
-  - 
+  - DownFireBall
   - 
   - 
   - 
