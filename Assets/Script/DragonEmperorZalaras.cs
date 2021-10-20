@@ -81,6 +81,7 @@ public class DragonEmperorZalaras : MonoBehaviour
                 }
                 break;
             case BossState.ClearEnsyutu:
+                m_game.BossClear();
                 ani.Play("Deth");
                 break;
         }
@@ -140,7 +141,6 @@ public class DragonEmperorZalaras : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if(!m_Damage)
         myHealth -= damage;
         m_Damage = true;
         StartCoroutine(IsDamage());
@@ -155,7 +155,6 @@ public class DragonEmperorZalaras : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             list[i].color = new Color(1f, 1f, 1f, 1f);
-
         }
     }
 

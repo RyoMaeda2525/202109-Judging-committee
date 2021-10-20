@@ -1,85 +1,62 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class Fireball : MonoBehaviour {
     public bool pushOnAwake = true;
     public Vector3 startDirection;
     public float startMagnitude;
-    public ForceMode2D forceMode2D;
-    Vector3 playerpos = default;
-    Vector2 vero = default;
-    public float m_moveSpeed = 1;
-    public float dethtimer = 6;
+    public ForceMode forceMode;
     public GameObject fieryEffect;
     public GameObject smokeEffect;
     public GameObject explodeEffect;
-    protected Rigidbody2D rgbd;
-    private CircleCollider2D[] circle = default;
+    protected Rigidbody rgbd;
 
     public void Awake()
     {
-        rgbd = GetComponent<Rigidbody2D>();
-        circle = GetComponentsInChildren<CircleCollider2D>();
+        rgbd = GetComponent<Rigidbody>();
     }
 
     public void Start()
     {
-        //if (pushOnAwake)
-        //{
-        //    Push(startDirection, startMagnitude);
-        //}
-        playerpos = GameObject.FindWithTag("Player").transform.position;
-        rgbd = GetComponent<Rigidbody2D>();
-        vero.x = playerpos.x - this.transform.position.x;
-        vero.y = playerpos.y - this.transform.position.y;
-        vero = vero.normalized * m_moveSpeed;
-        rgbd.velocity = vero;
+        if (pushOnAwake)
+        {
+            Push(startDirection, startMagnitude);
+        }
     }
 
-    //public void Push(Vector3 direction, float magnitude)
-    //{
-    //    Vector3 dir = direction.normalized;
-    //    rgbd.AddForce(dir * magnitude, forceMode2D);
-    //}
-
-    public void OnCollisionEnter2D(Collision2D col)
+    public void Push(Vector3 direction, float magnitude)
     {
-        if (col.gameObject.tag == "Player" )
-        {
-            col.gameObject.GetComponent<PlayerHp>().Damage();
-        }
-        //rgbd.Sleep();
+        Vector3 dir = direction.normalized;
+        rgbd.AddForce(dir * magnitude, forceMode);
+    }
+
+    public void OnCollisionEnter(Collision col)
+    {
+        rgbd.Sleep();
         if (fieryEffect != null)
         {
-            fieryEffect.SetActive(false);
+            StopParticleSystem(fieryEffect);
         }
         if (smokeEffect != null)
         {
-            smokeEffect.SetActive(false);
+            StopParticleSystem(smokeEffect);
         }
         if (explodeEffect != null)
-        {
-
             explodeEffect.SetActive(true);
-        }
-        StartCoroutine(Destroy());
     }
 
-    //public void StopParticleSystem(GameObject g)
-    //{
-    //    ParticleSystem[] par;
-    //    par = g.GetComponentsInChildren<ParticleSystem>();
-    //    foreach(ParticleSystem p in par)
-    //    {
-    //        p.Stop();
-    //    }
-    //}
-
-    private IEnumerator Destroy()
+    public void StopParticleSystem(GameObject g)
     {
-       yield return new WaitForSeconds(3f);
-        Destroy(this.gameObject);
+        ParticleSystem[] par;
+        par = g.GetComponentsInChildren<ParticleSystem>();
+        //foreach (ParticleSystem p in par)
+        //{
+        //    p.Stop();
+        //}
+        par.Where(i => par != null).ToList().ForEach(i => i.Stop());
     }
 
     public void OnEnable()

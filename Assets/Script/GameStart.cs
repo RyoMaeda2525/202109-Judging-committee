@@ -7,6 +7,7 @@ public class GameStart : MonoBehaviour
 {
     [SerializeField] FadeOut m_Panal = default;
     float colortimer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,6 @@ public class GameStart : MonoBehaviour
 
     public void Play()
     {
-         SceneManager.LoadScene("SampleScene");
+         //SceneManager.LoadScene("SampleScene");
     }
 }

@@ -20,14 +20,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] FadeOut m_Panal = default;
     float colortimer = 0;
     bool LifeCount = true;
+    bool bossClear = false;
+    bool healInterval = false;
 
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
+        m_life = 2;
         m_LifeCounter = GetComponent<LifeCounter>();
         m_LifeCounter.Refresh(m_life);
-        AddScore(0);
+        m_score = 0;
     }
 
     // Update is called once per frame
@@ -39,15 +42,20 @@ public class GameManager : MonoBehaviour
         }
         if (IsFloorCheck)
         audio.Stop();
-        if(m_score  > 1)
+        if(m_score  > 1 )
         {
-            if (m_score % 1000 == 0 && m_life <= 2 && LifeCount)
+            if (m_score % 1000 == 0 && m_life <= 2 && LifeCount && healInterval == false)
             {
                 m_life += 1;
                 bool LifeCount = false;
                 m_LifeCounter.Refresh(m_life);
+                healInterval = true;
             }
-        }
+            else if (m_score % 1000 != 0)
+            {
+                healInterval = false;
+            }
+        }   
     }
 
 
@@ -63,17 +71,26 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDead()
     {
-        if(m_life != 1)
+        if (!bossClear)
         {
-            m_life -= 1;
-            m_LifeCounter.Refresh(m_life);
+            if (m_life != 1)
+            {
+                m_life -= 1;
+                m_LifeCounter.Refresh(m_life);
+                GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                m_life -= 1;
+                m_LifeCounter.Refresh(m_life);
+                m_playerManager.Dead();
+            }
         }
-        else
-        {
-            m_life -= 1;
-            m_LifeCounter.Refresh(m_life);
-            m_playerManager.Dead();
-        }
+    }
+
+    public void BossClear()
+    {
+        bossClear = true;
     }
 
     public void GameClear()

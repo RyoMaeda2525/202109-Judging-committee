@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FuflyGun : MonoBehaviour
-{
+{ 
     Vector3 playerpos = default;
     [SerializeField] GameObject m_bulletPrefab = default;
     public float Fireinterval = 1;
     public float timer = 0;
+    public bool deth = false;
+    [SerializeField] EnemyHP enemyHp = default;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +26,19 @@ public class FuflyGun : MonoBehaviour
             Fire();
             timer = 0;
         }
+
+        if(enemyHp.myHealth <= 0)
+        {
+            deth = true;
+        }
     }
 
     void Fire()
     {
-        playerpos = GameObject.FindWithTag("Player").transform.position;
-        Instantiate(m_bulletPrefab, this.transform.position, Quaternion.identity);
+        if (!deth)
+        {
+            playerpos = GameObject.FindWithTag("Player").transform.position;
+            Instantiate(m_bulletPrefab, this.transform.position, Quaternion.identity);
+        } 
     }
 }

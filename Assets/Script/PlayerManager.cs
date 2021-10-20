@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     public GroundCheck ground;//接地判定用object
     public bool isGround = false;//接地判定
     private Animator anim = default;
-    public GameObject Bullet = default;  
+    public GameObject Bullet = default;
     [SerializeField] Transform m_muzzle = default;
     [SerializeField, Range(0, 10)] int m_bulletLimit = 0;
     public int jumpCount = 0;//ジャンプカウンター
@@ -47,68 +47,99 @@ public class PlayerManager : MonoBehaviour
         m_tra = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        dagerCount = Bullet.transform.GetComponentsInChildren<DaggerManager>().Length;
-        dagerReinforcementCount = Bullet.transform.GetComponentsInChildren<DaggerReinforcementManager>().Length;
-        isGround = ground.IsGround();
         float h = Input.GetAxisRaw("Horizontal");
         Vector2 v = GetComponent<Rigidbody2D>().velocity;
         velocity = m_rb.velocity;
-        if (!deth)
+        if (playerhp.i == 0)
         {
-            if (playerhp.i == 0)
+            if (h != 0)
             {
-                if (h != 0)
-                {
-                    anim.SetBool("walk", true);
-                    // 左右の移動
-                    m_rb.velocity = new Vector2(h * walkForce, v.y);
-                    m_tra.localScale = new Vector2(Mathf.Sign(h), transform.localScale.y);
-                    Vector2 f = new Vector2(h, 0).normalized * walkForce;
-                    m_rb.AddForce(f);
-                }
-                else
-                {
-                    // スライドモーション
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(v.x * sliding, v.y);
-                    anim.SetBool("walk", false);
+                anim.SetBool("walk", true);
+                // 左右の移動
+                m_rb.velocity = new Vector2(h * walkForce, v.y);
+                m_tra.localScale = new Vector2(Mathf.Sign(h), transform.localScale.y);
+                Vector2 f = new Vector2(h, 0).normalized * walkForce;
+                m_rb.AddForce(f);
+            }
+            else
+            {
+                // スライドモーション
+                GetComponent<Rigidbody2D>().velocity = new Vector2(v.x * sliding, v.y);
+                anim.SetBool("walk", false);
 
-                }
-                if (Input.GetButtonDown("Jump"))
-                {
-                    if (jumpCount <= 0)
-                    {
-                        velocity.y = flyForce;
-                        m_rb.velocity = velocity;
-                        jumpCount += 1;
-                    }
-
-                }
-                if (isGround == true)
-                {
-                    anim.SetBool("Jump", false);
-                    jumpCount = 0;
-                }
-                if (isGround == false)
-                {
-                    anim.SetBool("Jump", true);
-                }
-
-                if (Input.GetButtonDown("Fire1"))
-                {
-                    //AttackStart();
-                    anim.SetBool("isAttack", true);
-                }
-
-                if (colorchange)
-                {
-                    ColorChage += Time.deltaTime;
-                }
             }
         }
-        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!deth)
+        {
+            dagerCount = Bullet.transform.GetComponentsInChildren<DaggerManager>().Length;
+            dagerReinforcementCount = Bullet.transform.GetComponentsInChildren<DaggerReinforcementManager>().Length;
+            isGround = ground.IsGround();
+            //float h = Input.GetAxisRaw("Horizontal");
+            //Vector2 v = GetComponent<Rigidbody2D>().velocity;
+            //velocity = m_rb.velocity;
+            //    if (playerhp.i == 0)
+            //    {
+            //        if (h != 0)
+            //        {
+            //            anim.SetBool("walk", true);
+            //            // 左右の移動
+            //            m_rb.velocity = new Vector2(h * walkForce, v.y);
+            //            m_tra.localScale = new Vector2(Mathf.Sign(h), transform.localScale.y);
+            //            Vector2 f = new Vector2(h, 0).normalized * walkForce;
+            //            m_rb.AddForce(f);
+            //        }
+            //        else
+            //        {
+            //            // スライドモーション
+            //            GetComponent<Rigidbody2D>().velocity = new Vector2(v.x * sliding, v.y);
+            //            anim.SetBool("walk", false);
+
+            //        }
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (jumpCount <= 0)
+                {
+                    GetComponent<AudioSource>().Play();
+                    velocity.y = flyForce;
+                    m_rb.velocity = velocity;
+                    jumpCount += 1;
+                }
+
+            }
+            if (isGround == true)
+            {
+                anim.SetBool("Jump", false);
+                jumpCount = 0;
+            }
+            if (isGround == false)
+            {
+                anim.SetBool("Jump", true);
+            }
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                //AttackStart();
+                anim.SetBool("isAttack", true);
+            }
+
+            if (colorchange)
+            {
+                ColorChage += Time.deltaTime;
+            }
+
+        }
+        else
+        {
+            Vector2 velocity = Vector2.zero;
+        }
+
     }
 
     public bool Floor()
@@ -128,23 +159,22 @@ public class PlayerManager : MonoBehaviour
             BossGroundCheck = true;
         }
         isBossGround = false;
-        return  BossGroundCheck;
+        return BossGroundCheck;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "GroundCheck")
-        { 
-            Destroy(collision.gameObject);
+        {
+            collision.gameObject.GetComponent<FloorDestroy>().OnDestroy();
             isGroundCheck = true;
         }
-        if(collision.tag == "BossGround")
+        if (collision.tag == "BossGround")
         {
             Destroy(collision.gameObject);
             isBossGround = true;
         }
     }
-
     public void AddSpead(float speed)
     {
         walkForce += speed;
@@ -161,7 +191,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (m_bulletLimit == 0 || dagerCount + dagerReinforcementCount < m_bulletLimit)    // 画面内の弾数を制限する
         {
-             if (gm.m_life == 3 && jumpCount != 0)
+            if (gm.m_life == 3 && jumpCount != 0)
             {
                 GameObject go4 = Instantiate(m_bulletPrefabReinforcement2, this.m_muzzle.position, Quaternion.identity);
                 go4.transform.SetParent(Bullet.transform);
@@ -193,7 +223,6 @@ public class PlayerManager : MonoBehaviour
 
     public void Dead()
     {
-        Vector2 velocity = Vector2.zero;
         deth = true;
         anim.Play("Dead");
     }
@@ -202,11 +231,15 @@ public class PlayerManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameOver");
     }
-    
+
     public void LightDeth()
     {
         Debug.Log("a");
         Destroy(m_light);
     }
 
+    public void AddScore()
+    {
+        gm.AddScore(100);
+    }
 }

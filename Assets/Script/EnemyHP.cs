@@ -59,6 +59,7 @@ public class EnemyHP : MonoBehaviour
 
     public IEnumerator ColorChange()
     {
+        GetComponent<AudioSource>().Play();
         Debug.Log("b");
         m_rb.gravityScale = 0;
         GetComponent<Animator>().Play("Deth");
@@ -75,7 +76,7 @@ public class EnemyHP : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.gameObject.name == "rat" && collision.tag == "Player")
+        if (this.gameObject.tag == "rat" && collision.tag == "Player")
         {
             m_RatCheck.GetComponent<ratPlayerCheck>().hit();
         }
