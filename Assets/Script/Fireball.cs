@@ -56,7 +56,7 @@ public class Fireball : MonoBehaviour {
         //{
         //    p.Stop();
         //}
-        par.Where(i => par != null).ToList().ForEach(i => i.Stop());
+        par.ToList().ForEach(i => i.Stop());
     }
 
     public void OnEnable()
