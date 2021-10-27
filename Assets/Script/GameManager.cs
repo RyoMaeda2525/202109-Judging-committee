@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     bool LifeCount = true;
     bool bossClear = false;
     bool healInterval = false;
-    int _maxScore = 99999999;
+    int m_maxScore = 99999999;
     float m_scoreChangeInterval = 1f;
 
     // Start is called before the first frame update
