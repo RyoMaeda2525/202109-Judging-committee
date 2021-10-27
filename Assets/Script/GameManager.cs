@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] PlayerManager m_playerManager= null;
+    [SerializeField] PlayerManager m_playerManager = null;
     //[SerializeField] SceneLoader m_sceneLoader = null;
     [SerializeField] public int m_life = 2;
     public static int m_score = 0;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
     bool LifeCount = true;
     bool bossClear = false;
     bool healInterval = false;
+    int _maxScore = 99999999;
+    float m_scoreChangeInterval = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,13 +44,13 @@ public class GameManager : MonoBehaviour
             GameTimer += Time.deltaTime;
         }
         if (IsFloorCheck)
-        audio.Stop();
-        if(m_score  > 1 )
+            audio.Stop();
+        if (m_score > 1)
         {
             if (m_score % 1000 == 0 && m_life <= 2 && LifeCount && healInterval == false)
             {
                 m_life += 1;
-                bool LifeCount = false;
+                LifeCount = false;
                 m_LifeCounter.Refresh(m_life);
                 healInterval = true;
             }
@@ -55,17 +58,28 @@ public class GameManager : MonoBehaviour
             {
                 healInterval = false;
             }
-        }   
+        }
     }
 
 
     public void AddScore(int score)
     {
-        m_score += score;
         if (m_scoreText)
         {
-            m_scoreText.text = "Score: " + m_score .ToString("d10"); // 10桁でゼロ埋め (zero padding) する
-            LifeCount = true;       
+            int tempScore = m_score;
+            m_score = Mathf.Min(m_score + score, m_maxScore);
+
+            // カンストしてなかったら得点表示を更新する
+            if (tempScore != m_maxScore)
+            {
+                DOTween.To(() => tempScore,
+                    x => tempScore = x,
+                    m_score,
+                    m_scoreChangeInterval)
+                    .OnUpdate(() => m_scoreText.text = tempScore.ToString("00000000"))
+                    .OnComplete(() => m_scoreText.text = m_score.ToString("00000000"));
+                LifeCount = true;
+            }
         }
     }
 
@@ -97,13 +111,15 @@ public class GameManager : MonoBehaviour
     {
         gameClear = true;
         m_score += bossScore;
-        if(GameTimer < 180)
+        if (GameTimer < 180)
         {
             m_score += 3000;
-        }else if(GameTimer < 300)
+        }
+        else if (GameTimer < 300)
         {
             m_score += 2000;
-        }else if(GameTimer < 600)
+        }
+        else if (GameTimer < 600)
         {
             m_score += 1000;
         }
